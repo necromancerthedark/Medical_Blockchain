@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from "./components/Dashboard";
+import MyLoginPage from './components/MyLoginPage';
+import AllDocuments from "./pages/AllDocuments";
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, logout } from "./firebase";
+import React, { useEffect } from "react";
+import Settings from "./pages/Settings";
+import Shared from "./pages/Shared";
+import LeftNavBar from "./components/LeftNavBar";
+
 
 function App() {
+
+  const logoutHandler = () => {
+    logout().then(() => {
+      alert("Logout successfull!");
+    })
+      .catch((err) => { alert("Error : " + err) });
+    return false;
+  };
+
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) {
+      console.log("Not Logged In");
+    }
+    else {
+      console.log("Already Logged In");
+    }
+  }, [user, loading]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {user && <LeftNavBar logoutHandler={logoutHandler} />}
+      <Routes>
+        <Route exact path='/' element={<Dashboard />}></Route>
+        <Route exact path='/login' element={< MyLoginPage />}></Route>
+        <Route exact path='/alldocuments' element={< AllDocuments />}></Route>
+        <Route exact path='/settings' element={< Settings />}></Route>
+        <Route exact path='/shared' element={< Shared />}></Route>
+      </Routes>
+    </Router >
   );
 }
 

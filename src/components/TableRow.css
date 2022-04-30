@@ -1,0 +1,10 @@
+td,
+button {
+  text-align: center;
+  margin: 5px;
+  font-size: 1.1em;
+}
+
+tr:hover {
+  background-color: rgb(238, 236, 235);
+}

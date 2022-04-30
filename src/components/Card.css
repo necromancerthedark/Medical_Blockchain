@@ -1,0 +1,51 @@
+.box{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    width: calc(100% / 4 - 15px);
+    width: 200px;
+    background: #fff;
+    padding: 15px 14px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 1;
+  }
+
+.box-topic{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.box .number{
+    display: inline-block;
+    font-size: 35px;
+    margin-top: -6px;
+    font-weight: 500;
+}
+
+.box .indicator{
+    display: flex;
+    align-items: center;
+}
+
+.box .indicator i{
+    height: 20px;
+    width: 20px;
+    background: #8FDACB;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.box .indicator i.down{
+    background: #e87d88;
+}
+
+.box .indicator .text{
+    font-size: 12px;
+}
